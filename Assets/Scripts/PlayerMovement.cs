@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     public Material currentFloorMaterial;
     public Material pastFloorMaterial;
     float horizontalMovement;
+    float verticalMovement;
     public float speed = 10.0f;
     bool isCurrentTimeLine = true;
     // Start is called before the first frame update
@@ -18,21 +19,23 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         horizontalMovement = Input.GetAxis("Horizontal");
+        verticalMovement = Input.GetAxis("Vertical");
         if (horizontalMovement > 0)
             transform.Translate(Vector3.right * speed * Time.deltaTime * horizontalMovement);
         else
             Debug.Log("Cannot go back!");
+        transform.Translate(Vector3.up * Time.deltaTime * verticalMovement * speed);
 
         TimeSwitch();
     }
 
-    /*void TimeSwitch()
+    void TimeSwitch()
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            Debug.Log("")
+            Debug.Log("C is pressed. ");
             isCurrentTimeLine = !isCurrentTimeLine;
-            if(isCurrentTimeLine == true)
+            if (isCurrentTimeLine == true)
             {
                 floor.GetComponent<SpriteRenderer>().material = currentFloorMaterial;
             }
@@ -42,5 +45,5 @@ public class PlayerMovement : MonoBehaviour
             }
 
         }
-    }*/
+    }
 }
